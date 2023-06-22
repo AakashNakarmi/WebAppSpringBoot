@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup Form</title>
+  <style>
+    /* CSS styling for the form and layout */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form {
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      padding: 20px;
+      width: 300px;
+    }
+
+    .form input[type="text"],
+    .form input[type="email"],
+    .form input[type="tel"],
+    .form input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      margin: 6px 0;
+      box-sizing: border-box;
+    }
+
+    .form input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<!--<h1>HI</h1>-->
+<!--<span th:text="${session.username}"></span>-->
+<div class="container">
+  <div class="form">
+    <h2>Signup</h2>
+    <form action="signup2" method="post">
+
+      <input type="text" placeholder="Username" name="username" required>
+      <input type="text" placeholder="First Name" name="fname" required>
+      <input type="text" placeholder="Last Name" name="lname" required>
+      <input type="text" placeholder="Email" name="email" required>
+      <input type="text" placeholder="Phone" name="phone" required>
+      <input type="submit" value="Signup">
+    </form>
+  </div>
+</div>
+</body>
+</html>
