@@ -3,6 +3,7 @@ package com.example.webappspringboot;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,13 +35,17 @@ public class MainRestController {
 
 
     @PostMapping("/login")
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session){
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session, Model model){
 
         Optional<Credential> credValue=credentialRepository.findById(username);
 
         if(credValue.isPresent()){
             if(credValue.get().getPassword().equals(password)){
                 session.setAttribute("username",username);
+                Optional<Userdetail> userdetail=userdetailRepository.findById(username);
+                if(userdetail.isPresent()){
+                    model.addAttribute("userdetail",userdetail.get());
+                }
                 return "dashboard";
             }
             else return "landingpage";
@@ -57,7 +62,12 @@ public class MainRestController {
         userdetail.setLname(lname);
         userdetail.setEmail(email);
         userdetail.setPhone(phone);
-        //session.setAttribute("username",username);
+        session.setAttribute("username",username);
+        session.setAttribute("fname",fname);
+        session.setAttribute("lname",lname);
+        session.setAttribute("email",email);
+        session.setAttribute("phone",phone);
+
         userdetailRepository.save(userdetail);
 
         return "dashboard";
