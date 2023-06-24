@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <title>Login Page</title>
+  <title>User Type</title>
   <style>
     /* Importing fonts from Google */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
@@ -56,16 +56,11 @@
       color: #555;
     }
 
-    .wrapper .form-field input {
-      width: 100%;
-      display: block;
-      border: none;
-      outline: none;
-      background: none;
-      font-size: 1.0rem;
-      color: #666;
-      padding: 10px 15px 10px 10px;
-      /* border: 1px solid red; */
+    .wrapper .form-field input[type="checkbox"] {
+      transform: scale(1.9); /* Increase the size of the checkboxes */
+      margin-right: 10px; /* Add some spacing between the checkbox and label */
+      margin-top: 15px;
+      margin-left: 10px;
     }
 
     .wrapper .form-field {
@@ -120,25 +115,30 @@
     <img src="https://www.freepnglogos.com/uploads/w-letter-logo-png/w-letter-letter-pictures-pixabay-29.png" alt="">
   </div>
   <div class="text-center mt-4 name">
-    Welcome to World-CBT
+    Select your role/s:
   </div>
-  <form class="p-3 mt-3" action="login" method="post">
+  <form class="p-3 mt-3" action="usertype1" method="post">
     <div class="form-field d-flex align-items-center">
-      <span class="far fa-user"></span>
-      <input type="text" name="username" id="userName" placeholder="Username">
+      <label>
+        <input type="checkbox" name="type" value="SELLER"> Seller
+      </label>
+
     </div>
     <div class="form-field d-flex align-items-center">
       <span class="fas fa-key"></span>
-      <input type="password" name="password" id="pwd" placeholder="Password">
+      <label>
+        <input type="checkbox" name="type" value="BUYER"> Buyer
+      </label><br>
     </div>
-    <button class="btn mt-3">Login</button>
+    <button class="btn mt-3">
+<!--      <div class="text-center fs-6">-->
+<!--      <a th:href="@{interdashboard}">-->
+        Next
+<!--      </a></div>-->
+</button>
   </form>
-  <div class="text-center fs-6">
-    <!-- <a href="#">Forget password?</a> or  -->
-    <a th:href="@{signup}">Sign up</a>
-  </div>
-</div>
 
+</div>
 </body>
 
 </html>

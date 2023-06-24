@@ -1,15 +1,14 @@
 package com.example.webappspringboot;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "usertypelinks")
 public class Usertypelink {
     @Id
     @Column(name = "id", nullable = false, length = 5)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usertypelinks_id_seq")
+//    @SequenceGenerator(name = "usertypelinks_id_seq", sequenceName = "usertypelinks_id_seq", allocationSize = 1)
     private String id;
 
     @Column(name = "username", length = 40)

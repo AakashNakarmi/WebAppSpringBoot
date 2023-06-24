@@ -3,9 +3,7 @@ package com.example.webappspringboot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -29,13 +27,25 @@ public class MainRestController {
         return "landingpage";
     }
     @PostMapping("/signup1")
-    public String signup(@RequestParam("username") String username,@RequestParam("password") String password){
+    public String signup(@RequestParam("username") String username,@RequestParam("password") String password, HttpSession session){
 
         Credential credential=new Credential();
         credential.setUsername(username);
         credential.setPassword(password);
+        session.setAttribute("username",username);
         credentialRepository.save(credential);
-        return "interdashboard";
+        return "usertype";
+    }
+    // Handle GET and POST requests for /signup
+    @RequestMapping(value = "/signup", method = {RequestMethod.GET, RequestMethod.POST})
+    public String signUpForm() {
+        // Add your logic here to display the sign-up form or perform other actions
+        return "signup"; // Assuming "signup" is the name of your Thymeleaf signup.html template
+    }
+    @RequestMapping(value = "/usertype", method = {RequestMethod.GET, RequestMethod.POST})
+    public String userTypeForm() {
+        // Add your logic here to display the sign-up form or perform other actions
+        return "usertype"; // Assuming "signup" is the name of your Thymeleaf signup.html template
     }
 
 
@@ -73,12 +83,11 @@ public class MainRestController {
             else return "landingpage";
         }
         else return "landingpage";
-
     }
 
 
-    @PostMapping("/signup2")
-    public String signup2(@RequestParam("username") String username,@RequestParam("fname") String fname,@RequestParam("lname") String lname,@RequestParam("email") String email,@RequestParam("phone") String phone, HttpSession session){
+    @PostMapping("/extradetails")
+    public String extradetails(@RequestParam("username") String username,@RequestParam("fname") String fname,@RequestParam("lname") String lname,@RequestParam("email") String email,@RequestParam("phone") String phone, HttpSession session){
         Userdetail userdetail =new Userdetail();
         userdetail.setUsername(username);
         userdetail.setFname(fname);
@@ -95,6 +104,22 @@ public class MainRestController {
 
         return "landingpage";
     }
+
+    @PostMapping("/usertype1")
+    public String usertype(HttpSession session,@RequestParam("type")String type){
+        Usertypelink usertypelink= new Usertypelink();
+        String username = (String) session.getAttribute("username");
+        usertypelink.setUsername(username);
+        usertypelink.setType(type);
+        usertypelink.setId("002");
+
+        usertypelinkRepository.save(usertypelink);
+        return "interdashboard";
+    }
+
+
+
+
 
 
 //    @GetMapping("/save")
